@@ -1,9 +1,12 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
-namespace WC.Model
+namespace WC.DTO
 {
-    [Table("WikiPage")]
-    public class WikiPage : EntityModel
+    public class WikiPageVersion
     {
         public string Title { get; set; }
         public string Body { get; set; }
@@ -11,7 +14,8 @@ namespace WC.Model
         public string Ip { get; set; }
         public bool Locked { get; set; }
         public int UserId { get; set; }
-        [ForeignKey("UserId")]
         public virtual User User { get; set; }
+        public int WikiId { get; set; }
+        public virtual WikiPage Wiki { get; set; }
     }
 }

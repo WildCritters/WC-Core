@@ -6,13 +6,10 @@ namespace WC.Model
     [Table("RoleFunction")]
     public class RoleFunction {
         public int Id { get; set; }
-        public int RoleId { get; set; }
-        
+        public int RoleId { get; set; }  
         [ForeignKey("RoleId")]
         public Role Role { get; set; }
-        
         public int FunctionId { get; set; }
-
         [ForeignKey("FunctionId")]
         public Function Function { get; set; }   
     }

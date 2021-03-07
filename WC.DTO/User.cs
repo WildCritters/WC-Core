@@ -22,5 +22,6 @@ namespace WC.DTO
         public bool Active { get; set; } 
         public int RoleId { get; set; }
         public Role Role { get; set; }
+        public List<Alias> Aliases { get; set; }
     }
 }

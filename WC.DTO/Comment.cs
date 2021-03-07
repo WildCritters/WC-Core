@@ -1,22 +1,20 @@
-﻿using Microsoft.EntityFrameworkCore;
-using System;
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
-namespace WC.Model
+namespace WC.DTO
 {
-    [Table("Comments")]
-    [Index(nameof(PostId))]
-    public class Comment : EntityModel
+    public class Comment
     {
         public DateTimeOffset PostedAt { get; set; }
         public string Body { get; set; }
         public int Score { get; set; }
         public string Ip { get; set; }
         public int PostId { get; set; }
-        [ForeignKey("PostId")]
         public virtual Post Post { get; set; }
         public int UserId { get; set; }
-        [ForeignKey("UserId")]
         public virtual User User { get; set; }
     }
 }
