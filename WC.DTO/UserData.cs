@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace WC.DTO
 {
-    public class UserData
+    public class UserData : EntityModel
     {
         public DateTimeOffset LastLoggedAt { get; set; }
         public DateTimeOffset LastForumReadAt { get; set; }
@@ -16,7 +16,6 @@ namespace WC.DTO
         public int NoteUpdateCount { get; set; }
         public int FavouriteCount { get; set; }
         public int NotificationActive { get; set; }
-        public int UserId { get; set; }
         public virtual User User { get; set; }
     }
 }

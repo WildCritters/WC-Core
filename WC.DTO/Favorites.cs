@@ -6,11 +6,9 @@ using System.Threading.Tasks;
 
 namespace WC.DTO
 {
-    public class Favorites
+    public class Favorites : EntityModel
     {
-        public int PostId { get; set; }
         public Post Post { get; set; }
-        public int UserId { get; set; }
         public User User { get; set; }
     }
 }

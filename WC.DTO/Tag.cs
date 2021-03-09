@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace WC.DTO
 {
-    public class Tag
+    public class Tag : EntityModel
     {
         public string Name { get; set; }
         public int PostCount { get; set; }

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace WC.DTO
 {
-    public class UserSettings
+    public class UserSettings : EntityModel
     {
         public bool ReceiveMailNotifications { get; set; }
         public int CommentThreshold { get; set; }
@@ -20,7 +20,6 @@ namespace WC.DTO
         public string BlacklistUsers { get; set; }
         public string SignatureTitle { get; set; }
         public string SignatureBody { get; set; }
-        public int UserId { get; set; }
         public virtual User User { get; set; }
     }
 }

@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace WC.DTO
 {
-    public class User
+    public class User : EntityModel
     {
         public long Id { get; set; }
         public String UserName { get; set; }
@@ -19,9 +19,8 @@ namespace WC.DTO
         public Guid ActivationCode { get; set; }
         public String TimeZone { get; set; }
         public String Ip { get; set; }
-        public bool Active { get; set; } 
-        public int RoleId { get; set; }
+        public bool Active { get; set; }
         public Role Role { get; set; }
-        public List<Alias> Aliases { get; set; }
+        public IEnumerable<Alias> Aliases { get; set; }
     }
 }

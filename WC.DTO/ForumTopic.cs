@@ -6,14 +6,13 @@ using System.Threading.Tasks;
 
 namespace WC.DTO
 {
-    public class ForumTopic
+    public class ForumTopic : EntityModel
     {
         public string Title { get; set; }
         public int ResponseCount { get; set; }
         public bool Sticky { get; set; }
         public bool Locked { get; set; }
         public int Priority { get; set; }
-        public int UserId { get; set; }
         public virtual User User { get; set; }
     }
 }

@@ -6,10 +6,9 @@ using System.Threading.Tasks;
 
 namespace WC.DTO
 {
-    public class ForumPost
+    public class ForumPost : EntityModel
     {
         public string Body { get; set; }
-        public int TopicId { get; set; }
         public virtual ForumTopic Topic { get; set; }
     }
 }

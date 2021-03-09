@@ -5,9 +5,8 @@ using System.Threading.Tasks;
 
 namespace WC.DTO
 {
-    public class Function
+    public class Function : EntityModel
     {
-        public int Id { get; set; }
         public String Name { get; set; }
     }
 }

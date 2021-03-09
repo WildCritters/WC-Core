@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace WC.Model
 {
     [Table("WikiPageVersion")]
-    public class WikiPageVersion
+    public class WikiPageVersion : EntityModel
     {
         public string Title { get; set; }
         public string Body { get; set; }

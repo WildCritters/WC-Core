@@ -6,11 +6,9 @@ using System.Threading.Tasks;
 
 namespace WC.DTO
 {
-    public class Mail
+    public class Mail : EntityModel
     {
-        public int SenderId { get; set; }
         public virtual User Sender { get; set; }
-        public int Receiverid { get; set; }
         public virtual User Receiver { get; set; }
         public string Title { get; set; }
         public string Body { get; set; }

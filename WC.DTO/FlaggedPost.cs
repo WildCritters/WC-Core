@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace WC.DTO
 {
-    public class FlaggedPost
+    public class FlaggedPost : EntityModel
     {
         public string Reason { get; set; }
         public bool Resolved { get; set; }
@@ -14,11 +14,8 @@ namespace WC.DTO
         public string StaffComment { get; set; }
         public string StaffAction { get; set; }
         public bool DMailSent { get; set; }
-        public int StaffuserId { get; set; }
         public virtual User StaffUser { get; set; }
-        public int PostId { get; set; }
         public virtual Post Post { get; set; }
-        public int UserId { get; set; }
         public virtual User User { get; set; }
     }
 }

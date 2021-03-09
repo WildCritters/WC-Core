@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace WC.DTO
 {
-    public class Post
+    public class Post : EntityModel
     {
         public string Extension { get; set; }
         public int Size { get; set; }
@@ -25,11 +25,8 @@ namespace WC.DTO
         public DateTimeOffset LastCommented { get; set; }
         public DateTimeOffset LastNote { get; set; }
         public int FavouriteCount { get; set; }
-        public int UploaderId { get; set; }
         public virtual User Uploader { get; set; }
-        public int ApproverId { get; set; }
         public virtual User Approver { get; set; }
-        public int ParentId { get; set; }
         public virtual Post Parent { get; set; }
     }
 }

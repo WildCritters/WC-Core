@@ -6,12 +6,11 @@ using System.Threading.Tasks;
 
 namespace WC.DTO
 {
-    public class Alias
+    public class Alias : EntityModel
     {
         public string Name { get; set; }
         public string Reason { get; set; }
         public string Status { get; set; }
-        public int UserId { get; set; }
         public virtual User User { get; set; }
     }
 }
