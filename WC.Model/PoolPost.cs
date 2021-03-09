@@ -9,8 +9,6 @@ using System.Threading.Tasks;
 namespace WC.Model
 {
     [Table("PoolPost")]
-    [Index(nameof(PoolId), IsUnique = true)]
-    [Index(nameof(PostId), IsUnique = true)]
     public class PoolPost : EntityModel
     {
         public int Sequence { get; set; }

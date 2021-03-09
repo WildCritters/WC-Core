@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace WC.Model
 {
     [Table("Comments")]
-    [Index(nameof(PostId))]
+    //[Index(nameof(PostId))]
     public class Comment : EntityModel
     {
         public DateTimeOffset PostedAt { get; set; }

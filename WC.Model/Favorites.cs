@@ -2,7 +2,7 @@
 
 namespace WC.Model
 {
-    [Table("Alias")]
+    [Table("Favorites")]
     public class Favorites : EntityModel
     {
         public int PostId { get; set; }

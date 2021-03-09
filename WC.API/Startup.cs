@@ -11,6 +11,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
+using Microsoft.EntityFrameworkCore;
+using WC.Context;
 
 namespace WC.API
 {
@@ -26,11 +28,15 @@ namespace WC.API
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-
+            services.AddDbContext<WildCrittersDBContext>(opt => opt.UseMySql(Configuration["ConnectionStrings:Default"]));
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "WC.API", Version = "v1" });
+                c.SwaggerDoc("WildCritters", new OpenApiInfo()
+                {
+                    Title = "API WildCritters",
+                    Version = "1"
+                });
             });
         }
 
@@ -40,9 +46,11 @@ namespace WC.API
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
-                app.UseSwagger();
-                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "WC.API v1"));
             }
+
+            app.UseSwagger();
+
+            app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/WildCritters/swagger.json", "API WildCritters"));
 
             app.UseHttpsRedirection();
 

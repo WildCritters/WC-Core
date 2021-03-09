@@ -5,7 +5,6 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace WC.Model
 {
     [Table("Tag")]
-    [Index(nameof(Name), IsUnique = true)]
     public class Tag : EntityModel
     {
         public string Name { get; set; }

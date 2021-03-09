@@ -10,16 +10,6 @@ using System.Threading.Tasks;
 namespace WC.Model
 {
     [Table("Post")]
-    [Index(nameof(Hash), IsUnique = true)]
-    [Index(nameof(DateOfCreation))]
-    [Index(nameof(LastCommented))]
-    [Index(nameof(LastNote))]
-    [Index(nameof(Size))]
-    [Index(nameof(Width))]
-    [Index(nameof(Height))]
-    [Index(nameof(UploaderId))]
-    [Index(nameof(ApproverId))]
-    [Index(nameof(Status))]
     public class Post : EntityModel
     {
         public string Extension { get; set; }
