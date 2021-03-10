@@ -5,8 +5,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Contracts\" />
-    <Folder Include="Implementations\" />
+    <ProjectReference Include="..\WC.DTO\WC.DTO.csproj" />
+    <ProjectReference Include="..\WC.Repository\WC.Repository.csproj" />
   </ItemGroup>
 
 </Project>

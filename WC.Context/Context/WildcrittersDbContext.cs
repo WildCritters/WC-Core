@@ -33,6 +33,8 @@ namespace WC.Context
         public DbSet<UserSettings> UserSettings { get; set; }
         public DbSet<WikiPage> WikiPages { get; set; }
         public DbSet<WikiPageVersion> WikiPageVersions { get; set; }
+        public DbSet<Note> Notes { get; set; }
+        public DbSet<NoteVersion> NoteVersion { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
