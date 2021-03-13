@@ -24,13 +24,16 @@ namespace WC.Repository.Implementations
             return context.Notes.ToList();
         }
 
-        public Note GetNoteByID(int id)
+        public Note GetNoteById(int id)
         {
             return context.Notes.Find(id);
         }
 
         public void InsertNote(Note note)
         {
+            note.Active = true;
+            note.DateOfCreation = DateTimeOffset.Now;
+            note.LastUpdate = DateTimeOffset.Now;
             context.Notes.Add(note);
         }
 
@@ -42,6 +45,7 @@ namespace WC.Repository.Implementations
 
         public void UpdateNote(Note note)
         {
+            note.LastUpdate = DateTimeOffset.Now;
             context.Entry(note).State = EntityState.Modified;
         }
 

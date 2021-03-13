@@ -13,6 +13,8 @@ using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
 using Microsoft.EntityFrameworkCore;
 using WC.Context;
+using WC.API.Configurations;
+using AutoMapper;
 
 namespace WC.API
 {
@@ -28,8 +30,12 @@ namespace WC.API
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddAutoMapper(typeof(MapperCongifuration));
+
             services.AddDbContext<WildCrittersDBContext>(opt => opt.UseMySql(Configuration["ConnectionStrings:Default"]));
+            
             services.AddControllers();
+            
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("WildCritters", new OpenApiInfo()

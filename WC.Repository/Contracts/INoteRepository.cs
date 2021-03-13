@@ -10,7 +10,7 @@ namespace WC.Repository.Contracts
     public interface INoteRepository
     {
         IEnumerable<Note> GetNotes();
-        Note GetNoteByID(int id);
+        Note GetNoteById(int id);
         void InsertNote(Note note);
         void DeleteNote(int noteId);
         void UpdateNote(Note note);
