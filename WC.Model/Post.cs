@@ -35,8 +35,5 @@ namespace WC.Model
         public int ApproverId { get; set; }
         [ForeignKey("ApproverId")]
         public virtual User Approver { get; set; }
-        public int ParentId { get; set; }
-        [ForeignKey("ParentId")]
-        public virtual Post Parent { get; set; }
     }
 }

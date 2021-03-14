@@ -15,6 +15,10 @@ using Microsoft.EntityFrameworkCore;
 using WC.Context;
 using WC.API.Configurations;
 using AutoMapper;
+using WC.Service.Contracts;
+using WC.Service.Implementations;
+using WC.Repository.Contracts;
+using WC.Repository.Implementations;
 
 namespace WC.API
 {
@@ -35,7 +39,11 @@ namespace WC.API
             services.AddDbContext<WildCrittersDBContext>(opt => opt.UseMySql(Configuration["ConnectionStrings:Default"]));
             
             services.AddControllers();
-            
+
+            ConfigureService(services);
+
+            ConfigureRepository(services);
+
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("WildCritters", new OpenApiInfo()
@@ -68,6 +76,16 @@ namespace WC.API
             {
                 endpoints.MapControllers();
             });
+        }
+
+        private void ConfigureService(IServiceCollection services)
+        {
+            services.AddScoped<INoteService, NoteService>();
+        }
+
+        private void ConfigureRepository(IServiceCollection services)
+        {
+            services.AddScoped<INoteRepository, NoteRepository>();
         }
     }
 }

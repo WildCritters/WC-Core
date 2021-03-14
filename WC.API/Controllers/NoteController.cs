@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using WC.API.Model.Note;
 using WC.DTO;
 using WC.Service.Contracts;
 
@@ -18,80 +19,68 @@ namespace WC.API.Controllers
         {
             this.service = service;
         }
-        // GET: NoteController
-        //public ActionResult Index()
-        //{
-        //    return View();
-        //}
 
-        // GET: NoteController/Details/5
         [HttpGet("/{id}")]
         public Note GetNoteById(int id)
         {
             return service.GetNoteById(id);
         }
 
-        // GET: NoteController/Create
-        //public ActionResult Create()
-        //{
-        //    return View();
-        //}
+        [HttpGet]
+        public GetNotesResponse GetNotes()
+        {
+            return new GetNotesResponse()
+            {
+                Notes = service.GetNotes()
+            }; 
+        }
 
-        // POST: NoteController/Create
-        //[HttpPost]
+        [HttpPost("/create")]
         //[ValidateAntiForgeryToken]
-        //public ActionResult Create(IFormCollection collection)
-        //{
-        //    try
-        //    {
-        //        return RedirectToAction(nameof(Index));
-        //    }
-        //    catch
-        //    {
-        //        return View();
-        //    }
-        //}
+        public ActionResult Create(InsertNoteRequest request)
+        {
+            service.InsertNote(request.X, 
+                request.Y, 
+                request.Width, 
+                request.Height, 
+                request.Body, 
+                request.IdPost);
 
-        // GET: NoteController/Edit/5
-        //public ActionResult Edit(int id)
-        //{
-        //    return View();
-        //}
+            return Ok();
+        }
 
-        // POST: NoteController/Edit/5
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public ActionResult Edit(int id, IFormCollection collection)
-        //{
-        //    try
-        //    {
-        //        return RedirectToAction(nameof(Index));
-        //    }
-        //    catch
-        //    {
-        //        return View();
-        //    }
-        //}
+        [HttpPut("/{id}/update")]
+        public ActionResult Edit(int id, UpdateNoteRequest request)
+        {
+            try
+            {
+                service.UpdateNote(request.X,
+                request.Y,
+                request.Width,
+                request.Height,
+                request.Body,
+                request.Id);
 
-        // GET: NoteController/Delete/5
-        //public ActionResult Delete(int id)
-        //{
-        //    return View();
-        //}
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500);
+            }
+        }
 
-        // POST: NoteController/Delete/5
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public ActionResult Delete(int id, IFormCollection collection)
-        //{
-        //    try
-        //    {
-        //        return RedirectToAction(nameof(Index));
-        //    }
-        //    catch
-        //    {
-        //        return View();
-        //    }
-        //}
+        [HttpDelete("/{id}/inactivate")]
+        public ActionResult Inactivate(int id)
+        {
+            service.DeleteLogicNote(id);
+            return Ok();
+        }
+
+        [HttpDelete("/{id}/delete")]
+        public ActionResult Delete(int id)
+        {
+            service.DeleteNote(id);
+            return Ok();
+        }
     }
 }

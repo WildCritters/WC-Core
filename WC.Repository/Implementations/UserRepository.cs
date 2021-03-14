@@ -10,43 +10,43 @@ using WC.Repository.Contracts;
 
 namespace WC.Repository.Implementations
 {
-    public class NoteRepository : INoteRepository, IDisposable
+    public class UserRepository : IUserRepository, IDisposable
     {
         private WildCrittersDBContext context;
 
-        public NoteRepository(WildCrittersDBContext context)
+        public UserRepository(WildCrittersDBContext context)
         {
             this.context = context;
         }
 
-        public IEnumerable<Note> GetNotes()
+        public IEnumerable<User> GetUsers()
         {
-            return context.Notes.ToList();
+            return context.Users.ToList();
         }
 
-        public Note GetNoteById(int id)
+        public User GetNoteById(int id)
         {
-            return context.Notes.AsNoTracking().FirstOrDefault(x => x.Id == id);
+            return context.Users.Find(id);
         }
 
-        public void InsertNote(Note note)
+        public void InsertUser(User user)
         {
-            note.Active = true;
-            note.DateOfCreation = DateTimeOffset.Now;
-            note.LastUpdate = DateTimeOffset.Now;
-            context.Notes.Add(note);
+            user.Active = true;
+            user.DateOfCreation = DateTimeOffset.Now;
+            user.LastUpdate = DateTimeOffset.Now;
+            context.Users.Add(user);
         }
 
-        public void DeleteNote(int noteId)
+        public void DeleteUser(int userId)
         {
-            Note note = context.Notes.Find(noteId);
-            context.Notes.Remove(note);
+            User user = context.Users.Find(userId);
+            context.Users.Remove(user);
         }
 
-        public void UpdateNote(Note note)
+        public void UpdateUser(User user)
         {
-            note.LastUpdate = DateTimeOffset.Now;
-            context.Entry(note).State = EntityState.Modified;
+            user.LastUpdate = DateTimeOffset.Now;
+            context.Entry(user).State = EntityState.Modified;
         }
 
         public void Save()

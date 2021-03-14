@@ -3,7 +3,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using WC;
 
 namespace WC.API.Configurations
 {
@@ -11,8 +10,8 @@ namespace WC.API.Configurations
     {
         public MapperCongifuration()
         {
-            CreateMap<Model.User, DTO.User>().ReverseMap();
-            CreateMap<Model.Note, DTO.Note>().ReverseMap();
+            CreateMap<WC.Model.User, DTO.User>().ReverseMap();
+            CreateMap<WC.Model.Note, DTO.Note>().ReverseMap();
         }
     }
 }
