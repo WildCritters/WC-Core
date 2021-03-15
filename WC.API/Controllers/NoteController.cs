@@ -11,7 +11,7 @@ using WC.Service.Contracts;
 namespace WC.API.Controllers
 {
     [ApiController]
-    [Route("api/notes")]
+    [Route("api/[controller]")]
     public class NoteController : ControllerBase
     {
         private INoteService service;
@@ -36,8 +36,7 @@ namespace WC.API.Controllers
         }
 
         [HttpPost("/create")]
-        //[ValidateAntiForgeryToken]
-        public ActionResult Create(InsertNoteRequest request)
+        public ActionResult CreateNote(InsertNoteRequest request)
         {
             service.InsertNote(request.X, 
                 request.Y, 
@@ -50,7 +49,7 @@ namespace WC.API.Controllers
         }
 
         [HttpPut("/{id}/update")]
-        public ActionResult Edit(int id, UpdateNoteRequest request)
+        public ActionResult UpdateNote(int id, UpdateNoteRequest request)
         {
             try
             {
@@ -69,15 +68,15 @@ namespace WC.API.Controllers
             }
         }
 
-        [HttpDelete("/{id}/inactivate")]
-        public ActionResult Inactivate(int id)
+        [HttpPut("/{id}/inactivate")]
+        public ActionResult InactivateNote(int id)
         {
             service.DeleteLogicNote(id);
             return Ok();
         }
 
         [HttpDelete("/{id}/delete")]
-        public ActionResult Delete(int id)
+        public ActionResult DeleteNote(int id)
         {
             service.DeleteNote(id);
             return Ok();
