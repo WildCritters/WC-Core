@@ -37,7 +37,7 @@ namespace WC.API
             services.AddAutoMapper(typeof(MapperCongifuration));
 
             services.AddDbContext<WildCrittersDBContext>(opt => opt.UseMySql(Configuration["ConnectionStrings:Default"]));
-            
+
             services.AddControllers();
 
             ConfigureService(services);
@@ -72,10 +72,7 @@ namespace WC.API
 
             app.UseAuthorization();
 
-            app.UseEndpoints(endpoints =>
-            {
-                endpoints.MapControllers();
-            });
+            app.UseEndpoints(endpoints => endpoints.MapControllers());
         }
 
         private void ConfigureService(IServiceCollection services)

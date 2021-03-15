@@ -23,14 +23,12 @@ namespace WC.Context.Configurations
 
         private static IConfigurationRoot BuildConfiguration(string path, string enviromentName = null, bool addUserSecrets = false)
         {
-
             IConfigurationBuilder builder = new ConfigurationBuilder()
                 .SetBasePath(path)
                 .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true);
 
             if (!string.IsNullOrEmpty(enviromentName))
                 builder = builder.AddJsonFile($"appsettings.{enviromentName}.json", optional: true);
-
 
             if (addUserSecrets)
             {

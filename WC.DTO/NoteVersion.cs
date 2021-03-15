@@ -13,7 +13,7 @@ namespace WC.DTO
         public int Width { get; set; }
         public int Height { get; set; }
         public string Body { get; set; }
-        public int version { get; set; }
+        public int Version { get; set; }
         public virtual Post Post { get; set; }
         public virtual Note Note { get; set; }
     }

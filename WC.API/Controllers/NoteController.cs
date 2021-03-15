@@ -14,7 +14,7 @@ namespace WC.API.Controllers
     [Route("api/[controller]")]
     public class NoteController : ControllerBase
     {
-        private INoteService service;
+        private readonly INoteService service;
         public NoteController(INoteService service)
         {
             this.service = service;
@@ -32,17 +32,17 @@ namespace WC.API.Controllers
             return new GetNotesResponse()
             {
                 Notes = service.GetNotes()
-            }; 
+            };
         }
 
         [HttpPost("/create")]
         public ActionResult CreateNote(InsertNoteRequest request)
         {
-            service.InsertNote(request.X, 
-                request.Y, 
-                request.Width, 
-                request.Height, 
-                request.Body, 
+            service.InsertNote(request.X,
+                request.Y,
+                request.Width,
+                request.Height,
+                request.Body,
                 request.IdPost);
 
             return Ok();
@@ -58,7 +58,7 @@ namespace WC.API.Controllers
                 request.Width,
                 request.Height,
                 request.Body,
-                request.Id);
+                id);
 
                 return Ok();
             }

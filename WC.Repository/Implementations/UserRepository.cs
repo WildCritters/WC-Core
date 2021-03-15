@@ -12,7 +12,7 @@ namespace WC.Repository.Implementations
 {
     public class UserRepository : IUserRepository, IDisposable
     {
-        private WildCrittersDBContext context;
+        private readonly WildCrittersDBContext context;
 
         public UserRepository(WildCrittersDBContext context)
         {
@@ -24,9 +24,9 @@ namespace WC.Repository.Implementations
             return context.Users.ToList();
         }
 
-        public User GetNoteById(int id)
+        public User GetUserById(int id)
         {
-            return context.Users.Find(id);
+            return context.Users.AsNoTracking().FirstOrDefault(x => x.Id == id);
         }
 
         public void InsertUser(User user)

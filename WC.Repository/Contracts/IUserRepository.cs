@@ -10,7 +10,7 @@ namespace WC.Repository.Contracts
     public interface IUserRepository
     {
         IEnumerable<User> GetUsers();
-        User GetNoteById(int id);
+        User GetUserById(int id);
         void InsertUser(User user);
         void DeleteUser(int userId);
         void UpdateUser(User user);

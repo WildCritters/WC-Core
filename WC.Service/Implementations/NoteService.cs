@@ -12,10 +12,10 @@ namespace WC.Service.Implementations
 {
     public class NoteService : INoteService
     {
-        private INoteRepository _repository;
-        private IMapper mapper;
+        private readonly INoteRepository _repository;
+        private readonly IMapper mapper;
 
-        public NoteService(INoteRepository repository, IMapper mapper) 
+        public NoteService(INoteRepository repository, IMapper mapper)
         {
             this._repository = repository;
             this.mapper = mapper;
@@ -33,7 +33,7 @@ namespace WC.Service.Implementations
 
         public void InsertNote(int x, int y, int width, int height, string body, int postId)
         {
-            Note model = new Note()
+            Note model = new()
             {
                 X = x,
                 Y = y,

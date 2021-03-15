@@ -3,7 +3,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-
+using WC.Service.Contracts;
+using WC.DTO;
+using WC.API.Model.User;
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace WC.API.Controllers
@@ -12,11 +14,15 @@ namespace WC.API.Controllers
     [ApiController]
     public class UserController : ControllerBase
     {
+        private readonly IUserService service;
+
         // GET: api/<UserController>
         [HttpGet]
-        public IEnumerable<string> Get()
+        public GetUsersResponse GetUsers()
         {
-            return new string[] { "value1", "value2" };
+            return new GetUsersResponse()
+            {
+            };
         }
 
         // GET api/<UserController>/5

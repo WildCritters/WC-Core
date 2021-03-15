@@ -12,7 +12,7 @@ namespace WC.Repository.Implementations
 {
     public class NoteRepository : INoteRepository, IDisposable
     {
-        private WildCrittersDBContext context;
+        private readonly WildCrittersDBContext context;
 
         public NoteRepository(WildCrittersDBContext context)
         {

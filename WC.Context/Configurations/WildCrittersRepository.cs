@@ -24,7 +24,6 @@ namespace WC.Context.Configurations
             Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> orderBy = null,
             string includeProperties = "")
         {
-
             IQueryable<TEntity> query = DbSet;
 
             if (filter != null) query = query.Where(filter);
