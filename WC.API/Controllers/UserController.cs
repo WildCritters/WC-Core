@@ -1,12 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using WC.Service.Contracts;
 using WC.DTO;
 using WC.API.Model.User;
-using AutoMapper;
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace WC.API.Controllers
@@ -77,7 +73,7 @@ namespace WC.API.Controllers
             }
             catch (Exception ex)
             {
-                return StatusCode(500);
+                return StatusCode(500, ex);
             }
         }
 
@@ -92,6 +88,13 @@ namespace WC.API.Controllers
         public ActionResult DeleteUser(int id)
         {
             service.DeleteUser(id);
+            return Ok();
+        }
+
+        [HttpPut("{id}/resetPassword")]
+        public ActionResult ResetPassword(int id, ResetPasswordUserRequest request)
+        {
+            service.resetPassword(id, request.NewPassword);
             return Ok();
         }
     }

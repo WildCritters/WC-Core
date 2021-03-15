@@ -23,7 +23,7 @@ namespace WC.Service.Implementations
 
         public IEnumerable<User> GetUsers()
         {
-            return mapper.Map<IEnumerable<Model.User>,IEnumerable<User>>(_repository.GetUsers());
+            return mapper.Map<IEnumerable<Model.User>, IEnumerable<User>>(_repository.GetUsers());
         }
 
         public User GetUserById(int id)
@@ -36,7 +36,7 @@ namespace WC.Service.Implementations
             byte[] passwordHash, passwordSalt;
 
             CreatePasswordHash(password, out passwordHash, out passwordSalt);
-            
+
             User model = new()
             {
                 UserName = username,
@@ -88,6 +88,21 @@ namespace WC.Service.Implementations
                 user.PasswordHash = passwordHash;
                 user.PasswordSalt = passwordSalt;
             }
+
+            _repository.UpdateUser(mapper.Map<User, Model.User>(user));
+            _repository.Save();
+        }
+
+        public void resetPassword(int userId, string password)
+        {
+            User user = mapper.Map<Model.User, User>(_repository.GetUserById(userId));
+
+            byte[] passwordHash, passwordSalt;
+
+            CreatePasswordHash(password, out passwordHash, out passwordSalt);
+
+            user.PasswordHash = passwordHash;
+            user.PasswordSalt = passwordSalt;
 
             _repository.UpdateUser(mapper.Map<User, Model.User>(user));
             _repository.Save();

@@ -15,5 +15,6 @@ namespace WC.Service.Contracts
         void DeleteLogicUser(int userId);
         void DeleteUser(int userId);
         void UpdateUser(string username, string password, string mail, string ip, bool banned, string banReason, int level, int roleId, int userId);
+        void resetPassword(int userId, string password);
     }
 }
