@@ -20,7 +20,7 @@ namespace WC.API.Controllers
             this.service = service;
         }
 
-        [HttpGet("/{id}")]
+        [HttpGet("{id}")]
         public Note GetNoteById(int id)
         {
             return service.GetNoteById(id);
@@ -35,7 +35,7 @@ namespace WC.API.Controllers
             };
         }
 
-        [HttpPost("/create")]
+        [HttpPost("create")]
         public ActionResult CreateNote(InsertNoteRequest request)
         {
             service.InsertNote(request.X,
@@ -48,7 +48,7 @@ namespace WC.API.Controllers
             return Ok();
         }
 
-        [HttpPut("/{id}/update")]
+        [HttpPut("{id}/update")]
         public ActionResult UpdateNote(int id, UpdateNoteRequest request)
         {
             try
@@ -68,14 +68,14 @@ namespace WC.API.Controllers
             }
         }
 
-        [HttpPut("/{id}/inactivate")]
+        [HttpPut("{id}/inactivate")]
         public ActionResult InactivateNote(int id)
         {
             service.DeleteLogicNote(id);
             return Ok();
         }
 
-        [HttpDelete("/{id}/delete")]
+        [HttpDelete("{id}/delete")]
         public ActionResult DeleteNote(int id)
         {
             service.DeleteNote(id);

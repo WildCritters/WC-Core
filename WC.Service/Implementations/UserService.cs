@@ -6,10 +6,10 @@ using System.Text;
 using System.Threading.Tasks;
 using WC.DTO;
 using WC.Repository.Contracts;
-
+using WC.Service.Contracts;
 namespace WC.Service.Implementations
 {
-    public class UserService
+    public class UserService : IUserService
     {
         private readonly IUserRepository _repository;
 
@@ -21,7 +21,7 @@ namespace WC.Service.Implementations
             this.mapper = mapper;
         }
 
-        public IEnumerable<User> GetNotes()
+        public IEnumerable<User> GetUsers()
         {
             return mapper.Map<IEnumerable<Model.User>,IEnumerable<User>>(_repository.GetUsers());
         }
@@ -31,11 +31,17 @@ namespace WC.Service.Implementations
             return mapper.Map<Model.User, User>(_repository.GetUserById(id));
         }
 
-        public void InsertUser(string username, string mail, string ip, bool banned, string banReason, int level, int roleId)
+        public void InsertUser(string username, string password, string mail, string ip, bool banned, string banReason, int level, int roleId)
         {
+            byte[] passwordHash, passwordSalt;
+
+            CreatePasswordHash(password, out passwordHash, out passwordSalt);
+            
             User model = new()
             {
-                UserName =username,
+                UserName = username,
+                PasswordHash = passwordHash,
+                PasswordSalt = passwordSalt,
                 Mail = mail,
                 Ip = ip,
                 Banned = banned,
@@ -62,7 +68,7 @@ namespace WC.Service.Implementations
             _repository.Save();
         }
 
-        public void UpdateNote(string username, string mail, string ip, bool banned, string banReason, int level, int roleId, int userId)
+        public void UpdateUser(string username, string password, string mail, string ip, bool banned, string banReason, int level, int roleId, int userId)
         {
             User user = mapper.Map<Model.User, User>(_repository.GetUserById(userId));
             user.UserName = username;
@@ -73,8 +79,27 @@ namespace WC.Service.Implementations
             user.Level = level;
             user.RoleId = roleId;
 
+            if (password != null)
+            {
+                byte[] passwordHash, passwordSalt;
+
+                CreatePasswordHash(password, out passwordHash, out passwordSalt);
+
+                user.PasswordHash = passwordHash;
+                user.PasswordSalt = passwordSalt;
+            }
+
             _repository.UpdateUser(mapper.Map<User, Model.User>(user));
             _repository.Save();
+        }
+
+        private void CreatePasswordHash(string password, out byte[] passHash, out byte[] passSalt)
+        {
+            using (var hmac = new System.Security.Cryptography.HMACSHA512())
+            {
+                passSalt = hmac.Key;
+                passHash = hmac.ComputeHash(System.Text.Encoding.UTF8.GetBytes(password));
+            }
         }
     }
 }

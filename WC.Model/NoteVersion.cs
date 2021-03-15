@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 
 namespace WC.Model
 {
+    [Table("NoteVersion")]
     public class NoteVersion : EntityModel
     {
         public int X { get; set; }

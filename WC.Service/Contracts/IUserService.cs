@@ -10,9 +10,10 @@ namespace WC.Service.Contracts
     public interface IUserService
     {
         IEnumerable<User> GetUsers();
-        User GetNoteById(int id);
-        void InsertUser(string userName, string password, string mail, string timeZone, string ip);
+        User GetUserById(int id);
+        void InsertUser(string username, string password, string mail, string ip, bool banned, string banReason, int level, int roleId);
+        void DeleteLogicUser(int userId);
         void DeleteUser(int userId);
-        void UpdateUser(string userName, string password, string mail, string timeZone, string ip);
+        void UpdateUser(string username, string password, string mail, string ip, bool banned, string banReason, int level, int roleId, int userId);
     }
 }
