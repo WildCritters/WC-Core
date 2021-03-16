@@ -79,12 +79,15 @@ namespace WC.API
         {
             services.AddScoped<INoteService, NoteService>();
             services.AddScoped<IUserService, UserService>();
+            services.AddScoped<IRoleService, RoleService>();
         }
 
         private void ConfigureRepository(IServiceCollection services)
         {
             services.AddScoped<INoteRepository, NoteRepository>();
             services.AddScoped<IUserRepository, UserRepository>();
+            services.AddScoped<IRoleRepository, RoleRepository>();
+            services.AddScoped<IFunctionRepository, FunctionRepository>();
         }
     }
 }

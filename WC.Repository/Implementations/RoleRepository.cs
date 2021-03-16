@@ -1,19 +1,23 @@
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Storage;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using WC.Context;
 using WC.Model;
+using WC.Repository.Contracts;
 
 namespace WC.Repository.Implementations
 {
     public class RoleRepository : IRoleRepository, IDisposable
     {
         private readonly WildCrittersDBContext context;
+        private IFunctionRepository functionRepository;
 
-        public RoleRepository(WildCrittersDBContext context)
+        public RoleRepository(WildCrittersDBContext context, IFunctionRepository functionRepository)
         {
             this.context = context;
+            this.functionRepository = functionRepository;
         }
 
         public IEnumerable<Role> GetRoles()
@@ -36,12 +40,36 @@ namespace WC.Repository.Implementations
             .RoleFunctions;
         }
 
-        public void CreateRole(Role role)
+        public void CreateRole(Role role, int[] functionIds)
         {
-            role.Active = true;
-            role.DateOfCreation = DateTimeOffset.Now;
-            role.LastUpdate = DateTimeOffset.Now;
-            context.Roles.Add(role);
+            IDbContextTransaction transaction = context.Database.BeginTransaction();
+            try
+            {
+                role.Active = true;
+                role.DateOfCreation = DateTimeOffset.Now;
+                role.LastUpdate = DateTimeOffset.Now;
+                context.Roles.Add(role);
+
+                IEnumerable<Function> functions = functionRepository.GetFunctions();
+                foreach(int functionId in functionIds)
+                {
+                    RoleFunction roleFunction = new()
+                    {
+                        Active = functions.Any(function => function.Id == functionId),
+                        FunctionId = functionId,
+                        DateOfCreation = DateTimeOffset.Now,
+                        RoleId = role.Id
+                    };
+                    context.RoleFunctions.Add(roleFunction);
+                }
+                context.SaveChanges();
+                transaction.Commit();
+            }
+            catch(Exception ex)
+            {
+                transaction.Rollback();
+                throw ex;
+            }
         }
 
         public void UpdateRole(Role role)
@@ -52,7 +80,8 @@ namespace WC.Repository.Implementations
 
         public void UpdateRoleFunction(RoleFunction roleFunction)
         {
-            
+            roleFunction.LastUpdate = DateTimeOffset.Now;
+            context.Entry(roleFunction).State = EntityState.Modified;
         }
 
         public void DeleteRole(int roleId)

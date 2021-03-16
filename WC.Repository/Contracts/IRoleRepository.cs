@@ -8,10 +8,11 @@ namespace WC.Repository.Implementations
     {
         IEnumerable<Role> GetRoles();
         Role GetRoleById(int id);
-        void CreateRole(Role role);
-        void UpdateRole(Role role);
-        void DeleteRole(int roleId);
         IEnumerable<RoleFunction> GetRoleFunctions(int id);
+        void CreateRole(Role role, int[] functionIds);
+        void UpdateRole(Role role);
+        void UpdateRoleFunction(RoleFunction roleFunction);
+        void DeleteRole(int roleId);
         void Save();
     }
 }

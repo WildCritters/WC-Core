@@ -13,7 +13,6 @@ namespace WC.Service.Implementations
     public class RoleService : IRoleService
     {
         private readonly IRoleRepository _repository;
-
         private readonly IMapper mapper;
 
         public RoleService(IRoleRepository repository, IMapper mapper)
@@ -32,11 +31,12 @@ namespace WC.Service.Implementations
             return mapper.Map<Model.Role, Role>(_repository.GetRoleById(roleId));
         }
 
-        public void CreateRole(string name){
+        public void CreateRole(string name, int[] functionsId)
+        {
             Role role = new(){
                 Name = name
             };
-            _repository.CreateRole(mapper.Map<Role,Model.Role>(role));
+            _repository.CreateRole(mapper.Map<Role,Model.Role>(role), functionsId);
         }
 
         public void DeleteRole(int roleId) 
@@ -45,14 +45,14 @@ namespace WC.Service.Implementations
             _repository.Save();
         }
 
-        public void UpdateRole(string name, int roleId)
+        public void UpdateRole(string name, int[] functionsId, int roleId)
         {
             Role role = mapper.Map<Model.Role, Role>(_repository.GetRoleById(roleId));
             role.Name = name;
-            _repository.CreateRole(mapper.Map<Role, Model.Role>(role));
+            _repository.UpdateRole(mapper.Map<Role, Model.Role>(role));
         }
 
-        public void AssignFunction(int roleId, List<int> functionsId)
+        public void AssignFunction(int roleId, int[] functionsId)
         {
             IEnumerable<RoleFunction> roleFunctions = 
             mapper.Map<IEnumerable<Model.RoleFunction>, IEnumerable<RoleFunction>>(_repository.GetRoleFunctions(roleId));
@@ -60,9 +60,10 @@ namespace WC.Service.Implementations
             foreach (RoleFunction function in roleFunctions)
             {
                 function.Active = functionsId.Any(x => x == function.FunctionId);
+                _repository.UpdateRoleFunction(mapper.Map<RoleFunction, Model.RoleFunction>(function));
             }
 
-            
+            _repository.Save();
         }
     }
 }

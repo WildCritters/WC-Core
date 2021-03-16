@@ -14,9 +14,9 @@ namespace WC.Service.Contracts
     {
         IEnumerable<Role> GetRoles();
         Role GetRoleById(int roleId);
-        void CreateRole(string name);
+        void CreateRole(string name, int[] functionsId);
         void DeleteRole(int roleId);
-        void UpdateRole(string name, int roleId);
-        void AssignFunction(int roleId, List<int> functionsId);
+        void UpdateRole(string name, int[] functionsId, int roleId);
+        void AssignFunction(int roleId, int[] functionsId);
     }
 }
