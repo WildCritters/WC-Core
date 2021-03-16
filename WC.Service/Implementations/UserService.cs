@@ -31,7 +31,7 @@ namespace WC.Service.Implementations
             return mapper.Map<Model.User, User>(_repository.GetUserById(id));
         }
 
-        public void InsertUser(string username, string password, string mail, string ip, bool banned, string banReason, int level, int roleId)
+        public void CreateUser(string username, string password, string mail, string ip, bool banned, string banReason, int level, int roleId)
         {
             byte[] passwordHash, passwordSalt;
 
@@ -50,7 +50,7 @@ namespace WC.Service.Implementations
                 RoleId = roleId
             };
 
-            _repository.InsertUser(mapper.Map<User, Model.User>(model));
+            _repository.CreateUser(mapper.Map<User, Model.User>(model));
             _repository.Save();
         }
 

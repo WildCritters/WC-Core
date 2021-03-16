@@ -29,7 +29,7 @@ namespace WC.Repository.Implementations
             return context.Notes.AsNoTracking().FirstOrDefault(x => x.Id == id);
         }
 
-        public void InsertNote(Note note)
+        public void CreateNote(Note note)
         {
             note.Active = true;
             note.DateOfCreation = DateTimeOffset.Now;

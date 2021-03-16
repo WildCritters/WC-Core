@@ -2,8 +2,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using WC.Context;
 using WC.Model;
 using WC.Repository.Contracts;
@@ -29,7 +27,7 @@ namespace WC.Repository.Implementations
             return context.Users.AsNoTracking().FirstOrDefault(x => x.Id == id);
         }
 
-        public void InsertUser(User user)
+        public void CreateUser(User user)
         {
             user.Active = true;
             user.DateOfCreation = DateTimeOffset.Now;

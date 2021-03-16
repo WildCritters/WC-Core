@@ -8,5 +8,6 @@ namespace WC.Model
     public class Role : EntityModel
     {
         public string Name { get; set; }
+        public IEnumerable<RoleFunction> RoleFunctions { get; set; }
     }
 }

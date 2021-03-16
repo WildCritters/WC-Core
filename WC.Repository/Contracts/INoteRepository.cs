@@ -11,7 +11,7 @@ namespace WC.Repository.Contracts
     {
         IEnumerable<Note> GetNotes();
         Note GetNoteById(int id);
-        void InsertNote(Note note);
+        void CreateNote(Note note);
         void DeleteNote(int noteId);
         void UpdateNote(Note note);
         void Save();

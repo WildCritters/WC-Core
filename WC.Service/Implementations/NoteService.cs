@@ -27,7 +27,7 @@ namespace WC.Service.Implementations
             return mapper.Map<Model.Note, Note>(_repository.GetNoteById(id));
         }
 
-        public void InsertNote(int x, int y, int width, int height, string body, int postId)
+        public void CreateNote(int x, int y, int width, int height, string body, int postId)
         {
             Note model = new()
             {
@@ -40,7 +40,7 @@ namespace WC.Service.Implementations
                 PostId = postId
             };
 
-            _repository.InsertNote(mapper.Map<Note, Model.Note>(model));
+            _repository.CreateNote(mapper.Map<Note, Model.Note>(model));
             _repository.Save();
         }
 

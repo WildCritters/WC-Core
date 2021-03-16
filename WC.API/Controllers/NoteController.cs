@@ -34,7 +34,7 @@ namespace WC.API.Controllers
         [HttpPost("create")]
         public ActionResult CreateNote(InsertNoteRequest request)
         {
-            service.InsertNote(request.X,
+            service.CreateNote(request.X,
                 request.Y,
                 request.Width,
                 request.Height,

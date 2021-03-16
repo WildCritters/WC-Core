@@ -39,7 +39,7 @@ namespace WC.API.Controllers
         [HttpPost("create")]
         public ActionResult CreateUser(InsertUserRequest request)
         {
-            service.InsertUser(
+            service.CreateUser(
                 request.UserName, 
                 request.Password, 
                 request.Mail, 

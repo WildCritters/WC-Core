@@ -11,7 +11,7 @@ namespace WC.Service.Contracts
     {
         IEnumerable<User> GetUsers();
         User GetUserById(int id);
-        void InsertUser(string username, string password, string mail, string ip, bool banned, string banReason, int level, int roleId);
+        void CreateUser(string username, string password, string mail, string ip, bool banned, string banReason, int level, int roleId);
         void DeleteLogicUser(int userId);
         void DeleteUser(int userId);
         void UpdateUser(string username, string password, string mail, string ip, bool banned, string banReason, int level, int roleId, int userId);

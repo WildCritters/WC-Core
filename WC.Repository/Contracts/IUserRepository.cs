@@ -11,7 +11,7 @@ namespace WC.Repository.Contracts
     {
         IEnumerable<User> GetUsers();
         User GetUserById(int id);
-        void InsertUser(User user);
+        void CreateUser(User user);
         void DeleteUser(int userId);
         void UpdateUser(User user);
         void Save();

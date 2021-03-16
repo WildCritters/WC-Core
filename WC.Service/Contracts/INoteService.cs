@@ -11,7 +11,7 @@ namespace WC.Service.Contracts
     {
         IEnumerable<Note> GetNotes();
         Note GetNoteById(int id);
-        void InsertNote(int x, int y, int width, int height, string body, int idPost);
+        void CreateNote(int x, int y, int width, int height, string body, int idPost);
         void DeleteLogicNote(int noteId);
         void DeleteNote(int noteId);
         void UpdateNote(int x, int y, int width, int height, string body, int noteId);
