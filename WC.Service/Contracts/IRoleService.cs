@@ -16,6 +16,7 @@ namespace WC.Service.Contracts
         Role GetRoleById(int roleId);
         void CreateRole(string name, int[] functionsId);
         void DeleteRole(int roleId);
+        void DeleteLogicRole(int roleId);
         void UpdateRole(string name, int[] functionsId, int roleId);
         void AssignFunction(int roleId, int[] functionsId);
     }

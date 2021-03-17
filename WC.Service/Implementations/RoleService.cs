@@ -39,8 +39,23 @@ namespace WC.Service.Implementations
             _repository.CreateRole(mapper.Map<Role,Model.Role>(role), functionsId);
         }
 
+        public void DeleteLogicRole(int roleId)
+        {
+            Role role = mapper.Map<Model.Role, Role>(_repository.GetRoleById(roleId));
+            role.Active = false;
+            _repository.UpdateRole(mapper.Map<Role, Model.Role>(role));
+        }
+
         public void DeleteRole(int roleId) 
         {
+            IEnumerable<RoleFunction> roleFunctions =
+            mapper.Map<IEnumerable<Model.RoleFunction>, IEnumerable<RoleFunction>>(_repository.GetRoleFunctions(roleId));
+
+            foreach (RoleFunction function in roleFunctions)
+            {
+                _repository.DeleteRoleFunction(mapper.Map<RoleFunction, Model.RoleFunction>(function));
+            }
+
             _repository.DeleteRole(roleId);
             _repository.Save();
         }

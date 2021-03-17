@@ -12,6 +12,7 @@ namespace WC.Repository.Implementations
         void CreateRole(Role role, int[] functionIds);
         void UpdateRole(Role role);
         void UpdateRoleFunction(RoleFunction roleFunction);
+        void DeleteRoleFunction(RoleFunction roleFunction);
         void DeleteRole(int roleId);
         void Save();
     }

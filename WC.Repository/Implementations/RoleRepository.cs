@@ -84,6 +84,11 @@ namespace WC.Repository.Implementations
             context.Entry(roleFunction).State = EntityState.Modified;
         }
 
+        public void DeleteRoleFunction(RoleFunction roleFunction)
+        {
+            context.RoleFunctions.Remove(roleFunction);
+        }
+
         public void DeleteRole(int roleId)
         {
             Role role = context.Roles.Find(roleId);
