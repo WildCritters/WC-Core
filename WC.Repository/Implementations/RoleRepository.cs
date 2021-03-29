@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore.Storage;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using WC.Context;
 using WC.Model;
 using WC.Repository.Contracts;
@@ -20,24 +21,23 @@ namespace WC.Repository.Implementations
             this.functionRepository = functionRepository;
         }
 
-        public IEnumerable<Role> GetRoles()
+        public async Task<IEnumerable<Role>> GetRoles()
         {
-            return context.Roles.ToList();
+            return await context.Roles.ToListAsync();
         }
 
-        public Role GetRoleById(int id)
+        public async Task<Role> GetRoleById(int id)
         {
-            return context.Roles.AsNoTracking()
+            return await context.Roles.AsNoTracking()
             .Include(x => x.RoleFunctions).ThenInclude(y => y.Function)
-            .FirstOrDefault(x => x.Id == id);
+            .FirstOrDefaultAsync(x => x.Id == id);
         }
 
         public IEnumerable<RoleFunction> GetRoleFunctions(int id)
         {
             return context.Roles.AsNoTracking()
             .Include(x => x.RoleFunctions)
-            .FirstOrDefault(x => x.Id == id)
-            .RoleFunctions;
+            .FirstOrDefaultAsync(x => x.Id == id).Result.RoleFunctions;
         }
 
         public void CreateRole(Role role, int[] functionIds)

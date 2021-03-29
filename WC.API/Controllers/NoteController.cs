@@ -7,7 +7,7 @@ using WC.Service.Contracts;
 namespace WC.API.Controllers
 {
     [ApiController]
-    [Route("api/[controller]")]
+    [Route("api/notes")]
     public class NoteController : ControllerBase
     {
         private readonly INoteService service;
@@ -16,7 +16,7 @@ namespace WC.API.Controllers
             this.service = service;
         }
 
-        [HttpGet("{id}")]
+        [HttpGet("{id}", Name = "GetNotesById")]
         public Note GetNoteById(int id)
         {
             return service.GetNoteById(id);
@@ -31,7 +31,7 @@ namespace WC.API.Controllers
             };
         }
 
-        [HttpPost("create")]
+        [HttpPost]
         public ActionResult CreateNote(InsertNoteRequest request)
         {
             service.CreateNote(request.X,
@@ -44,8 +44,8 @@ namespace WC.API.Controllers
             return Ok();
         }
 
-        [HttpPut("{id}/update")]
-        public ActionResult UpdateNote(int id, UpdateNoteRequest request)
+        [HttpPut]
+        public ActionResult UpdateNote(UpdateNoteRequest request)
         {
             try
             {
@@ -54,7 +54,7 @@ namespace WC.API.Controllers
                 request.Width,
                 request.Height,
                 request.Body,
-                id);
+                request.Id);
 
                 return Ok();
             }
@@ -64,14 +64,14 @@ namespace WC.API.Controllers
             }
         }
 
-        [HttpPut("{id}/inactivate")]
+        [HttpPut("{id}/inactivate", Name = "Inactivate")]
         public ActionResult InactivateNote(int id)
         {
             service.DeleteLogicNote(id);
             return Ok();
         }
 
-        [HttpDelete("{id}/delete")]
+        [HttpDelete]
         public ActionResult DeleteNote(int id)
         {
             service.DeleteNote(id);

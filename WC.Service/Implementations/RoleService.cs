@@ -21,14 +21,15 @@ namespace WC.Service.Implementations
             this.mapper = mapper;
         }
 
-        public IEnumerable<Role> GetRoles()
+        public async Task<IEnumerable<Role>> GetRoles()
         {
-            return mapper.Map<IEnumerable<Model.Role>, IEnumerable<Role>>(_repository.GetRoles());
+            var roles = await _repository.GetRoles();
+            return mapper.Map<IEnumerable<Model.Role>, IEnumerable<Role>>(roles);
         }
 
-        public Role GetRoleById(int roleId)
+        public async Task<Role> GetRoleById(int roleId)
         {
-            return mapper.Map<Model.Role, Role>(_repository.GetRoleById(roleId));
+            return mapper.Map<Model.Role, Role>(await _repository.GetRoleById(roleId));
         }
 
         public void CreateRole(string name, int[] functionsId)
@@ -41,7 +42,7 @@ namespace WC.Service.Implementations
 
         public void DeleteLogicRole(int roleId)
         {
-            Role role = mapper.Map<Model.Role, Role>(_repository.GetRoleById(roleId));
+            Role role = mapper.Map<Model.Role, Role>(_repository.GetRoleById(roleId).Result);
             role.Active = false;
             _repository.UpdateRole(mapper.Map<Role, Model.Role>(role));
         }
@@ -62,7 +63,7 @@ namespace WC.Service.Implementations
 
         public void UpdateRole(string name, int[] functionsId, int roleId)
         {
-            Role role = mapper.Map<Model.Role, Role>(_repository.GetRoleById(roleId));
+            Role role = mapper.Map<Model.Role, Role>(_repository.GetRoleById(roleId).Result);
             role.Name = name;
             _repository.UpdateRole(mapper.Map<Role, Model.Role>(role));
         }

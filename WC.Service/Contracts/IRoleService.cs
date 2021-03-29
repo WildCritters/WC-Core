@@ -12,8 +12,8 @@ namespace WC.Service.Contracts
 {
     public interface IRoleService
     {
-        IEnumerable<Role> GetRoles();
-        Role GetRoleById(int roleId);
+        Task<IEnumerable<Role>> GetRoles();
+        Task<Role> GetRoleById(int roleId);
         void CreateRole(string name, int[] functionsId);
         void DeleteRole(int roleId);
         void DeleteLogicRole(int roleId);
