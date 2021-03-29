@@ -11,7 +11,7 @@ using WC.Service.Contracts;
 
 namespace WC.API.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/roles")]
     [ApiController]
     public class RoleController : ControllerBase
     {
@@ -22,38 +22,43 @@ namespace WC.API.Controllers
             this.service = service;
         }
 
-        [HttpGet("{id}")]
-        public Role Get(int id)
+        [HttpGet("{id}", Name = "GetRolesById")]
+        public async Task<ActionResult> Get(int id)
         {
-            return service.GetRoleById(id);
+            var role = await service.GetRoleById(id);
+            
+            if (role == null)
+                return NotFound();
+
+            return Ok(role);
         }
 
         [HttpGet]
-        public GetRolesResponse GetRoles()
+        public async Task<GetRolesResponse> GetRoles()
         {
             return new GetRolesResponse()
             {
-                Roles = this.service.GetRoles()
+                Roles = await this.service.GetRoles()
             };
         }
 
-        [HttpPost("create")]
-        public ActionResult CreateRole(CreateRoleRequest request)
+        [HttpPost]
+        public ActionResult Create(CreateRoleRequest request)
         {
             service.CreateRole(request.Name, request.FunctionsId);
 
             return Ok();
         }
 
-        [HttpPut("{id}/update")]
-        public ActionResult UpdateRole(int id, UpdateRoleRequest request)
+        [HttpPut]
+        public ActionResult Update(UpdateRoleRequest request)
         {
             try
             {
                 service.UpdateRole(
                     request.Name, 
                     request.FunctionsId,
-                    id);
+                    request.Id);
 
                 return Ok();
             }
@@ -63,14 +68,14 @@ namespace WC.API.Controllers
             }
         }
 
-        [HttpPut("{id}/inactivate")]
+        [HttpPut("{id}/inactivate", Name = "InactivateRole")]
         public ActionResult InactivateRole(int id)
         {
             service.DeleteLogicRole(id);
             return Ok();
         }
 
-        [HttpDelete("{id}/delete")]
+        [HttpDelete]
         public ActionResult DeleteRole(int id)
         {
             service.DeleteRole(id);

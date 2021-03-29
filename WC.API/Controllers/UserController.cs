@@ -7,7 +7,7 @@ using WC.API.Model.User;
 
 namespace WC.API.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/users")]
     [ApiController]
     public class UserController : ControllerBase
     {
@@ -19,7 +19,7 @@ namespace WC.API.Controllers
         }
 
         // GET api/<UserController>/5
-        [HttpGet("{id}")]
+        [HttpGet("{id}", Name = "GetUsersById")]
         public User Get(int id)
         {
             return service.GetUserById(id);
@@ -36,7 +36,7 @@ namespace WC.API.Controllers
         }
 
         // POST api/<UserController>
-        [HttpPost("create")]
+        [HttpPost]
         public ActionResult CreateUser(InsertUserRequest request)
         {
             service.CreateUser(
@@ -53,8 +53,8 @@ namespace WC.API.Controllers
         }
 
         // PUT api/<UserController>/5
-        [HttpPut("{id}/update")]
-        public ActionResult UpdateUser(int id, UpdateUserRequest request)
+        [HttpPut]
+        public ActionResult UpdateUser(UpdateUserRequest request)
         {
             try
             {
@@ -67,7 +67,7 @@ namespace WC.API.Controllers
                 request.BanReason, 
                 request.Level, 
                 request.RoleId,
-                id);
+                request.Id);
 
                 return Ok();
             }
@@ -77,24 +77,24 @@ namespace WC.API.Controllers
             }
         }
 
-        [HttpPut("{id}/inactivate")]
+        [HttpPut("{id}/inactivate", Name = "InactivateUser")]
         public ActionResult InactivateUser(int id)
         {
             service.DeleteLogicUser(id);
             return Ok();
         }
 
-        [HttpDelete("{id}/delete")]
-        public ActionResult DeleteUser(int id)
-        {
-            service.DeleteUser(id);
-            return Ok();
-        }
-
-        [HttpPut("{id}/resetPassword")]
+        [HttpPut("{id}/reset", Name = "ResetUser")]
         public ActionResult ResetPassword(int id, ResetPasswordUserRequest request)
         {
             service.resetPassword(id, request.NewPassword);
+            return Ok();
+        }
+
+        [HttpDelete]
+        public ActionResult DeleteUser(int id)
+        {
+            service.DeleteUser(id);
             return Ok();
         }
     }
