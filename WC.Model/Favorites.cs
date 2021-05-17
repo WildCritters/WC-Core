@@ -2,8 +2,8 @@
 
 namespace WC.Model
 {
-    [Table("Favorites")]
-    public class Favorites : EntityModel
+    [Table("Favorite")]
+    public class Favorite : EntityModel
     {
         public int PostId { get; set; }
         [ForeignKey("PostId")]

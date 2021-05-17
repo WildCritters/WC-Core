@@ -2,14 +2,13 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using WC.Context;
 using WC.Model;
+using WC.Repository.Contracts;
 
 namespace WC.Repository.Implementations
 {
-    public class CommentRepository
+    public class CommentRepository : ICommentRepository, IDisposable
     {
         private readonly WildCrittersDBContext context;
 
