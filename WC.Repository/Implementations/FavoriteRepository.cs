@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using WC.Context;
 using WC.Model;
 
-namespace WC.Repository.Contracts
+namespace WC.Repository.Implementations
 {
     public class FavoriteRepository
     {
