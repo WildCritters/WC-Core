@@ -10,43 +10,43 @@ using WC.Repository.Contracts;
 
 namespace WC.Repository.Implementations
 {
-    public class PoolPostRepository : IPoolPostRepository, IDisposable
+    public class PostRepository : IPostRepository, IDisposable
     {
         private readonly WildCrittersDBContext context;
 
-        public PoolPostRepository(WildCrittersDBContext context)
+        public PostRepository(WildCrittersDBContext context)
         {
             this.context = context;
         }
 
-        public IEnumerable<PoolPost> GetPoolPosts()
+        public IEnumerable<Post> GetPosts()
         {
-            return context.PoolPosts.ToList();
+            return context.Posts.ToList();
         }
 
-        public PoolPost GetPoolPostById(int id)
+        public Post GetPostById(int id)
         {
-            return context.PoolPosts.AsNoTracking().FirstOrDefault(x => x.Id == id);
+            return context.Posts.AsNoTracking().FirstOrDefault(x => x.Id == id);
         }
 
-        public void CreatePoolPost(PoolPost poolPost)
+        public void CreatePost(Post post)
         {
-            poolPost.Active = true;
-            poolPost.DateOfCreation = DateTimeOffset.Now;
-            poolPost.LastUpdate = DateTimeOffset.Now;
-            context.PoolPosts.Add(poolPost);
+            post.Active = true;
+            post.DateOfCreation = DateTimeOffset.Now;
+            post.LastUpdate = DateTimeOffset.Now;
+            context.Posts.Add(post);
         }
 
-        public void DeletePoolPost(int poolPostId)
+        public void DeletePost(int postId)
         {
-            PoolPost poolPost = context.PoolPosts.Find(poolPostId);
-            context.PoolPosts.Remove(poolPost);
+            Post post = context.Posts.Find(postId);
+            context.Posts.Remove(post);
         }
 
-        public void UpdatePoolPost(PoolPost poolPost)
+        public void UpdatePost(Post post)
         {
-            poolPost.LastUpdate = DateTimeOffset.Now;
-            context.Entry(poolPost).State = EntityState.Modified;
+            post.LastUpdate = DateTimeOffset.Now;
+            context.Entry(post).State = EntityState.Modified;
         }
 
         public void Save()

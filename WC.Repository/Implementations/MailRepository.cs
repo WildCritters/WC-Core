@@ -10,7 +10,7 @@ using WC.Repository.Contracts;
 
 namespace WC.Repository.Implementations
 {
-    public class MailRepository : IMailRepository
+    public class MailRepository : IMailRepository, IDisposable
     {
         private readonly WildCrittersDBContext context;
 

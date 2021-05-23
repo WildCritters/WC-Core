@@ -6,10 +6,11 @@ using System.Text;
 using System.Threading.Tasks;
 using WC.Context;
 using WC.Model;
+using WC.Repository.Contracts;
 
 namespace WC.Repository.Implementations
 {
-    public class PoolRepository
+    public class PoolRepository : IPoolRepository, IDisposable
     {
         private readonly WildCrittersDBContext context;
 

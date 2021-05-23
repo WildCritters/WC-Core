@@ -7,7 +7,7 @@ using WC.Model;
 
 namespace WC.Repository.Implementations
 {
-    public class ForumTopicRepository : IForumTopicRepository
+    public class ForumTopicRepository : IForumTopicRepository, IDisposable
     {
         private readonly WildCrittersDBContext context;
 

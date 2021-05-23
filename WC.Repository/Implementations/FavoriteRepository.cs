@@ -4,10 +4,11 @@ using System.Linq;
 using Microsoft.EntityFrameworkCore;
 using WC.Context;
 using WC.Model;
+using WC.Repository.Contracts;
 
 namespace WC.Repository.Implementations
 {
-    public class FavoriteRepository
+    public class FavoriteRepository : IFavoriteRepository, IDisposable
     {
         private readonly WildCrittersDBContext context;
 

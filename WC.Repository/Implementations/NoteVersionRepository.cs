@@ -10,7 +10,7 @@ using WC.Repository.Contracts;
 
 namespace WC.Repository.Implementations
 {
-    public class NoteVersionRepository : INoteVersionRepository
+    public class NoteVersionRepository : INoteVersionRepository, IDisposable
     {
         private readonly WildCrittersDBContext context;
 

@@ -10,43 +10,43 @@ using WC.Repository.Contracts;
 
 namespace WC.Repository.Implementations
 {
-    public class PoolPostRepository : IPoolPostRepository, IDisposable
+    public class PostTagRepository : IPostTagRepository, IDisposable
     {
         private readonly WildCrittersDBContext context;
 
-        public PoolPostRepository(WildCrittersDBContext context)
+        public PostTagRepository(WildCrittersDBContext context)
         {
             this.context = context;
         }
 
-        public IEnumerable<PoolPost> GetPoolPosts()
+        public IEnumerable<PostTag> GetPostTags()
         {
-            return context.PoolPosts.ToList();
+            return context.PostTags.ToList();
         }
 
-        public PoolPost GetPoolPostById(int id)
+        public PostTag GetPostTagById(int id)
         {
-            return context.PoolPosts.AsNoTracking().FirstOrDefault(x => x.Id == id);
+            return context.PostTags.AsNoTracking().FirstOrDefault(x => x.Id == id);
         }
 
-        public void CreatePoolPost(PoolPost poolPost)
+        public void CreatePostTag(PostTag postTag)
         {
-            poolPost.Active = true;
-            poolPost.DateOfCreation = DateTimeOffset.Now;
-            poolPost.LastUpdate = DateTimeOffset.Now;
-            context.PoolPosts.Add(poolPost);
+            postTag.Active = true;
+            postTag.DateOfCreation = DateTimeOffset.Now;
+            postTag.LastUpdate = DateTimeOffset.Now;
+            context.PostTags.Add(postTag);
         }
 
-        public void DeletePoolPost(int poolPostId)
+        public void DeletePostTag(int postTagId)
         {
-            PoolPost poolPost = context.PoolPosts.Find(poolPostId);
-            context.PoolPosts.Remove(poolPost);
+            PostTag postTag = context.PostTags.Find(postTagId);
+            context.PostTags.Remove(postTag);
         }
 
-        public void UpdatePoolPost(PoolPost poolPost)
+        public void UpdatePostTag(PostTag postTag)
         {
-            poolPost.LastUpdate = DateTimeOffset.Now;
-            context.Entry(poolPost).State = EntityState.Modified;
+            postTag.LastUpdate = DateTimeOffset.Now;
+            context.Entry(postTag).State = EntityState.Modified;
         }
 
         public void Save()
