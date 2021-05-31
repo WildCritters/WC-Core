@@ -19,7 +19,7 @@ namespace WC.Context
         public DbSet<Avatar> Avatars { get; set; }
         public DbSet<Comment> Comments { get; set; }
         public DbSet<CommentVote> CommentVotes { get; set; }
-        public DbSet<Favorites> Favorites { get; set; }
+        public DbSet<Favorite> Favorites { get; set; }
         public DbSet<FlaggedPost> FlaggedPosts { get; set; }
         public DbSet<ForumPost> ForumPosts { get; set; }
         public DbSet<ForumTopic> ForumTopics { get; set; }
